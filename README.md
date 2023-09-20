@@ -3,11 +3,15 @@
 
 Train a new classifier with just a prompt.
 
-`./train.sh --class "cat: CAT_DESCRIPTION" --class "dog: DOG_DESCRIPTION"`
-
-`./classify.sh 'woof'`
-
+```bash
+./train.sh --class "cat: CAT_DESCRIPTION" --class "dog: DOG_DESCRIPTION"
 ```
+
+```bash
+./classify.sh 'woof'
+```
+
+```python
 {'data': 'woof',
  'prediction': 'dog',
  'probabilities': array([0.37996491, 0.62003509])}
@@ -31,6 +35,47 @@ Dogs are also known for their loyalty and affection towards their owners. Dogs a
 perform a variety of tasks, such as herding, hunting, and guarding. Dogs are also known for their ability to learn and
 perform a variety of tasks, such as herding, hunting, and guarding.  An example dog is snoopy, who is the best friend of
 charlie brown.  Another example dog is clifford, who is a big red dog.
+```
+
+```bash
+./classify.sh --data "I like to sharpen my claws on the furniture." --data "I like to roll in the mud." --data "I like to run any play with a ball." --data "I like to sleep under the bed and purr." --data "My owner is charlie brown." --data "Meow, human! I'm famished! Where's my food?" --data "Purr-fect." --data "Hiss! Who dared to wake me from my nap? I'll have my revenge... later." --data "I'm so happy to see you! Can we go for a walk/play fetch/get treats now?" --data "I'm feeling a little ruff today, can you give me a belly rub to make me feel better?"
+```
+
+```python
+
+{'data': 'I like to sharpen my claws on the furniture.',
+ 'prediction': 'cat',
+ 'probabilities': array([0.55363432, 0.44636568])}
+{'data': 'I like to roll in the mud.',
+ 'prediction': 'dog',
+ 'probabilities': array([0.4563782, 0.5436218])}
+{'data': 'I like to run any play with a ball.',
+ 'prediction': 'dog',
+ 'probabilities': array([0.44391914, 0.55608086])}
+{'data': 'I like to sleep under the bed and purr.',
+ 'prediction': 'cat',
+ 'probabilities': array([0.51146226, 0.48853774])}
+{'data': 'My owner is charlie brown.',
+ 'prediction': 'dog',
+ 'probabilities': array([0.40052991, 0.59947009])}
+{'data': "Meow, human! I'm famished! Where's my food?",
+ 'prediction': 'cat',
+ 'probabilities': array([0.5172964, 0.4827036])}
+{'data': 'Purr-fect.',
+ 'prediction': 'cat',
+ 'probabilities': array([0.50431873, 0.49568127])}
+{'data': "Hiss! Who dared to wake me from my nap? I'll have my revenge... "
+         'later.',
+ 'prediction': 'cat',
+ 'probabilities': array([0.50088163, 0.49911837])}
+{'data': "I'm so happy to see you! Can we go for a walk/play fetch/get treats "
+         'now?',
+ 'prediction': 'dog',
+ 'probabilities': array([0.42178513, 0.57821487])}
+{'data': "I'm feeling a little ruff today, can you give me a belly rub to make "
+         'me feel better?',
+ 'prediction': 'dog',
+ 'probabilities': array([0.46141002, 0.53858998])}
 ```
 
 # Installation
@@ -94,7 +139,7 @@ Install it
 
 Instantiate a classifier
 
-```
+```python
 from lamini import LaminiClassifier
 
 # Create a new classifier
@@ -103,7 +148,7 @@ classifier = LaminiClassifier()
 
 Define classes using prompts
 
-```
+```python
 classes = { "SOME_CLASS" : "SOME_PROMPT" }
 
 classifier.prompt_train(classes)
@@ -111,7 +156,7 @@ classifier.prompt_train(classes)
 
 Add some training examples (optional)
 
-```
+```python
 data = ["example 1", "example 2"]
 classifier.add_data_to_class("SOME_CLASS", data)
 
@@ -121,7 +166,7 @@ classifier.train()
 
 Classify your data
 
-```
+```python
 # Classify the data
 prediction = classifier.predict(data)
 
@@ -131,12 +176,12 @@ probabilities = classifier.predict_proba(data)
 
 Save your model
 
-```
+```python
 classifier.save("SOME_PATH")
 ```
 
 Load your model
-```
+```python
 classifier = LaminiClassifier.load(args["load"])
 ```
 
