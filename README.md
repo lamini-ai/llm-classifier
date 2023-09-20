@@ -149,6 +149,10 @@ Laminify converts your prompts into a pile of data, using the Llama 2 LLM. It th
 We use several specialized LLMs derived from Llama 2 to convert prompts into piles of training examples for each class.  The code for this is available
 in the lamini python package if you want to look at it.  Working on open sourcing it when I'm not too distracted...
 
+## Is this perfect?
+
+No, this is a week night hackathon project, give us feedback and we will improve it.
+
 ## Why wouldn't I just use a normal classifier like BART, XGBoost, BERT, etc?
 
 You don't need to label any data using Laminify.  Labeling data sucks.
@@ -157,7 +161,7 @@ No fiddling with hyperparameters. Fiddle with prompts instead.  Hopefully englis
 
 ## Why wouldn't I just use a LLM directly?
 
-A classifier can only output a class.  An LLM might answer the question "Is this talking about a cat" with "Well... that depends on ....".  Writing a parser sucks.
+A classifier always outputs a valid class.  An LLM might answer the question "Is this talking about a cat" with "Well... that depends on ....".  Writing a parser sucks.
 
 Added benefit: classifiers give you probabilities and can be calibrated: https://machinelearningmastery.com/threshold-moving-for-imbalanced-classification/
 
