@@ -19,6 +19,12 @@ Dogs are social animals that live in groups, called packs, in the wild. They are
 
 `pip install lamini`
 
+Setup your keys: https://lamini-ai.github.io/auth/
+
+# Command line tool (this repo)
+
+`git clone
+
 # Python Library
 
 ```
