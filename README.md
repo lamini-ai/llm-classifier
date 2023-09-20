@@ -32,7 +32,6 @@ Dog prompt:
 ```
 Dogs are social animals that live in groups, called packs, in the wild. They are also highly intelligent and trainable.
 Dogs are also known for their loyalty and affection towards their owners. Dogs are also known for their ability to learn and
-perform a variety of tasks, such as herding, hunting, and guarding. Dogs are also known for their ability to learn and
 perform a variety of tasks, such as herding, hunting, and guarding.  An example dog is snoopy, who is the best friend of
 charlie brown.  Another example dog is clifford, who is a big red dog.
 ```
