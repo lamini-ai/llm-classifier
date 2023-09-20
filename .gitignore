@@ -1,0 +1,17 @@
+**/llama_config_local.yaml
+**/*.swp
+.env
+
+**/node_modules/**
+*.DS_Store
+**/llama_llm.egg-info/
+**/lamini.egg-info/
+**/__pycache__/
+**/Training\ Data*
+platform/llama/data/quattr/coursera/**
+!platform/llama/data/quattr/coursera/215.json
+!platform/llama/data/quattr/coursera/465.json
+platform/llama/examples/Quattr_data/
+platform/llama/examples/copyai_data/
+platform/llama/examples/dataset/
+platform/llama/dist/
