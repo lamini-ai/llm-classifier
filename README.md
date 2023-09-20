@@ -195,7 +195,10 @@ in the lamini python package if you want to look at it.  Working on open sourcin
 
 ## Is this perfect?
 
-No, this is a week night hackathon project, give us feedback and we will improve it.
+No, this is a week night hackathon project, give us feedback and we will improve it.  Some known issues:
+
+1. It doesn't use batching aggressively over classes, so training on many classes could be sped up by more than 100x.
+2. We are refining the LLM example generators.  Send us any issues you find with your prompts adn we can improve these models.
 
 ## Why wouldn't I just use a normal classifier like BART, XGBoost, BERT, etc?
 
