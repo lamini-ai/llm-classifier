@@ -82,7 +82,9 @@ options:
 
 ```
 
-These command line scripts just call python.  You can also run this from python easily...
+These command line scripts just call python inside of docker so you don't have to care about an environment.  
+
+If you hate docker, you can also run this from python easily...
 
 
 # Python Library
