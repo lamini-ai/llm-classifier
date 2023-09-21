@@ -1,5 +1,5 @@
 
-# Laminify - Instantly classify data with [Lamini](lamini.ai) & Llama 2
+# Laminify - Instantly classify data with [Lamini](https://lamini.ai) & Llama 2
 
 Train a new classifier with just a prompt.
 
