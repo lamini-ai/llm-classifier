@@ -92,9 +92,9 @@ Requires docker: https://docs.docker.com/get-docker
 
 Setup your lamini keys (free): https://lamini-ai.github.io/auth/
 
-`git clone git@github.com:lamini-ai/laminify.git`
+`git clone git@github.com:lamini-ai/llm_classifier.git`
 
-`cd laminify`
+`cd llm_classifier`
 
 Train a new classifier.
 
@@ -195,7 +195,7 @@ classifier = LaminiClassifier.load(args["load"])
 
 ## How does it work?
 
-Laminify converts your prompts into a pile of data, using the Llama 2 LLM. It then finetunes another LLM to distinguish between each pile of data.  
+The LLM classifier converts your prompts into a pile of data, using the Llama 2 LLM. It then finetunes another LLM to distinguish between each pile of data.  
 
 We use several specialized LLMs derived from Llama 2 to convert prompts into piles of training examples for each class.  The code for this is available
 in the `lamini` python package if you want to look at it. 
@@ -209,7 +209,7 @@ No, this is a week night hackathon project, give us feedback and we will improve
 
 ## Why wouldn't I just use a normal classifier like BART, XGBoost, BERT, etc?
 
-You don't need to label any data using Laminify.  Labeling data sucks.
+You don't need to label any data using `LaminiClassifier`.  Labeling data sucks.
 
 No fiddling with hyperparameters. Fiddle with prompts instead.  Hopefully english is easier than attention_dropout_pcts.
 
