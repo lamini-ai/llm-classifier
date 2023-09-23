@@ -15,5 +15,5 @@ LOCAL_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd
 # build
 $LOCAL_DIRECTORY/scripts/build.sh
 
-docker run -v ~/.powerml:/root/.powerml -v $LOCAL_DIRECTORY/models:/app/laminify/models -it --rm --entrypoint /app/laminify/scripts/start-train.sh laminify:latest "$@"
+docker run -v ~/.powerml:/root/.powerml -v $LOCAL_DIRECTORY/models:/app/lamini_classifier/models -it --rm --entrypoint /app/lamini_classifier/scripts/start-train.sh lamini_classifier:latest "$@"
 

@@ -3,7 +3,7 @@ ARG BASE_NAME=python:3.11
 
 FROM $BASE_NAME as base
 
-ARG PACKAGE_NAME="laminify"
+ARG PACKAGE_NAME="lamini_classifier"
 
 # Install Ubuntu libraries
 RUN apt-get -yq update && apt-get -yqq install libpq-dev psmisc
@@ -17,5 +17,5 @@ RUN pip install -r requirements.txt
 COPY . /app/${PACKAGE_NAME}
 WORKDIR /app/${PACKAGE_NAME}
 
-ENTRYPOINT ["/app/laminify/scripts/start-classify.sh"]
+ENTRYPOINT ["/app/lamini_classifier/scripts/start-classify.sh"]
 
