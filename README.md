@@ -1,20 +1,28 @@
 
-# Laminify - Instantly classify data with [Lamini](https://lamini.ai) & Llama 2
+# LaminiClassifier - Instantly classify data with [Lamini](https://lamini.ai) & Llama 2
 
 Train a new classifier with just a prompt.
 
 ```bash
-./train.sh --class "cat: CAT_DESCRIPTION" --class "dog: DOG_DESCRIPTION"
+./train.sh
 ```
+
+We have some default classes. You can specify your own super easily like this:
+```bash
+./train.sh --class "cat: CAT_PROMPT" --class "dog: DOG_PROMPT"
+```
+The prompts are descriptions of your classes.
 
 ```bash
 ./classify.sh 'woof'
 ```
 
 ```python
-{'data': 'woof',
+{
+ 'data': 'woof',
  'prediction': 'dog',
- 'probabilities': array([0.37996491, 0.62003509])}
+ 'probabilities': array([0.37996491, 0.62003509])
+}
 ```
 
 For example, here is a cat/dog classifier trained using prompts.
@@ -191,14 +199,14 @@ classifier = LaminiClassifier.load(args["load"])
 Laminify converts your prompts into a pile of data, using the Llama 2 LLM. It then finetunes another LLM to distinguish between each pile of data.  
 
 We use several specialized LLMs derived from Llama 2 to convert prompts into piles of training examples for each class.  The code for this is available
-in the lamini python package if you want to look at it.  Working on open sourcing in an easier to read github page it when I'm not too distracted...
+in the `lamini` python package if you want to look at it. 
 
 ## Is this perfect?
 
 No, this is a week night hackathon project, give us feedback and we will improve it.  Some known issues:
 
 1. It doesn't use batching aggressively over classes, so training on many classes could be sped up by more than 100x.
-2. We are refining the LLM example generators.  Send us any issues you find with your prompts adn we can improve these models.
+2. We are refining the LLM example generators. Send us any issues you find with your prompts adn we can improve these models.
 
 ## Why wouldn't I just use a normal classifier like BART, XGBoost, BERT, etc?
 
@@ -212,7 +220,4 @@ A classifier always outputs a valid class.  An LLM might answer the question "Is
 
 Added benefit: classifiers give you probabilities and can be calibrated: https://machinelearningmastery.com/threshold-moving-for-imbalanced-classification/
 
-## Why does this FAQ sound so sarcastic?
-
-Because it is 5am
 
