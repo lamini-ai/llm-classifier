@@ -1,4 +1,4 @@
-# LaminiClassifier - Instantly classify data with [Lamini](https://lamini.ai) & Llama 2
+# LLM Classifier - Instantly classify data with [Lamini](https://lamini.ai) & Llama 2
 
 Train a new classifier with just a prompt.
 
