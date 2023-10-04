@@ -16,6 +16,7 @@ The prompts are descriptions of your classes.
 ./classify.sh 'woof'
 ```
 
+You can get the probabilities for all the classes, in this case `dog` (62%) and `cat` (38%). These can help with gauging uncertainty.
 ```python
 {
  'data': 'woof',
