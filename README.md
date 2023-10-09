@@ -91,7 +91,7 @@ Clone this repo, and run the `train.sh` or `classify.sh` command line tools.
 
 Requires docker: https://docs.docker.com/get-docker 
 
-Setup your lamini keys (free): https://lamini-ai.github.io/auth/
+Setup your lamini keys (free): [https://lamini-ai.github.io/auth/](https://lamini-ai.github.io/Start/auth/)
 
 `git clone git@github.com:lamini-ai/llm-classifier.git`
 
