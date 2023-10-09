@@ -93,9 +93,9 @@ Requires docker: https://docs.docker.com/get-docker
 
 Setup your lamini keys (free): https://lamini-ai.github.io/auth/
 
-`git clone git@github.com:lamini-ai/llm_classifier.git`
+`git clone git@github.com:lamini-ai/llm-classifier.git`
 
-`cd llm_classifier`
+`cd llm-classifier`
 
 Train a new classifier.
 
