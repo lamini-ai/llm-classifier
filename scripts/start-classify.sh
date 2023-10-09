@@ -13,5 +13,5 @@ set -Eeuoxa pipefail
 LOCAL_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Run the python train script
-PYTHONPATH=$LOCAL_DIRECTORY/.. python3 $LOCAL_DIRECTORY/../laminify/cli/classify.py "$@"
+PYTHONPATH=$LOCAL_DIRECTORY/.. python3 $LOCAL_DIRECTORY/../lamini_classifier/cli/classify.py "$@"
 
