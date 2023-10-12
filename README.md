@@ -2,6 +2,32 @@
 
 Train a new classifier with just a prompt. No data needed -- but add data to boost, if you have it.
 
+```
+from lamini import LaminiClassifier
+
+classifier = LaminiClassifier()
+classes = { "cat" : cat_description, "dog": dog_description }
+classifier.prompt_train(classes)
+```
+
+Then, classify!
+```
+probabilities = classifier.predict_proba("woof")
+>> {
+ 'data': 'woof',
+ 'prediction': 'dog',
+ 'probabilities': array([0.37996491, 0.62003509])
+}
+```
+
+Optionally, add data before you train:
+```
+classifier.add_data_to_class("cat", "meow") # optional
+classifier.prompt_train(classes)
+```
+
+# Run now
+
 ```bash
 ./train.sh
 ```
@@ -138,7 +164,6 @@ These command line scripts just call python inside of docker so you don't have t
 
 If you hate docker, you can also run this from python easily...
 
-
 # Python Library
 
 Install it
@@ -161,14 +186,14 @@ classes = { "SOME_CLASS" : "SOME_PROMPT" }
 classifier.prompt_train(classes)
 ```
 
-Add some training examples (optional)
+Or if you have some training examples (optional)
 
 ```python
 data = ["example 1", "example 2"]
 classifier.add_data_to_class("SOME_CLASS", data)
 
 # Don't forget to train after adding data
-classifier.train()
+classifier.prompt_train()
 ```
 
 Classify your data
@@ -189,7 +214,7 @@ classifier.save("SOME_PATH")
 
 Load your model
 ```python
-classifier = LaminiClassifier.load(args["load"])
+classifier = LaminiClassifier.load("SOME_PATH")
 ```
 
 # FAQ
