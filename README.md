@@ -5,9 +5,14 @@ Train a new classifier with just a prompt. No data needed -- but add data to boo
 ```
 from lamini import LaminiClassifier
 
-classifier = LaminiClassifier()
-classes = { "cat" : cat_description, "dog": dog_description }
-classifier.prompt_train(classes)
+llm = LaminiClassifier()
+
+prompts={
+  "cat": "Cats are generally more independent and aloof than dogs, who are often more social and affectionate. Cats are also more territorial and may be more aggressive when defending their territory.  Cats are self-grooming animals, using their tongues to keep their coats clean and healthy. Cats use body language and vocalizations, such as meowing and purring, to communicate.",
+  "dog": "Dogs are more pack-oriented and tend to be more loyal to their human family.  Dogs, on the other hand, often require regular grooming from their owners, including brushing and bathing. Dogs use body language and barking to convey their messages. Dogs are also more responsive to human commands and can be trained to perform a wide range of tasks.",
+}
+
+llm.prompt_train(prompts)
 ```
 
 Then, classify!
@@ -22,8 +27,9 @@ probabilities = classifier.predict_proba("woof")
 
 Optionally, add data before you train:
 ```
-classifier.add_data_to_class("cat", "meow")
-classifier.prompt_train(classes)
+llm.add_data_to_class("cat", ["Whiskers is a cat. He likes to eat fish."])
+llm.add_data_to_class("dog", ["Fido is a dog. He likes to eat bones."])
+llm.prompt_train(prompts)
 ```
 
 If you include data on classes that aren't in your `classes`, then the classifier will still learn to predict them, but it won't have a description to leverage to further boost them. As a general suggestion, if you don't have any or little paired data to include on a class, then making sure there's a good description of it in the `classes` is the way to get the LLM to understand what it does.
@@ -54,7 +60,7 @@ You can get the probabilities for all the classes, in this case `dog` (62%) and 
 }
 ```
 
-For example, here is a cat/dog classifier trained using prompts.
+Here are our cat/dog prompts.
 
 Cat prompt:
 
