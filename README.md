@@ -27,8 +27,8 @@ probabilities = classifier.predict_proba("woof")
 
 Optionally, add data before you train:
 ```
-llm.add_data_to_class("cat", ["Whiskers is a cat. He likes to eat fish."])
-llm.add_data_to_class("dog", ["Fido is a dog. He likes to eat bones."])
+llm.add_data_to_class("cat", "Whiskers is a cat. He likes to eat fish.")
+llm.add_data_to_class("dog", ["Fido is a dog. He likes to eat bones.", "bark bark"])
 llm.prompt_train(prompts)
 ```
 
