@@ -22,7 +22,7 @@ probabilities = classifier.predict_proba("woof")
 
 Optionally, add data before you train:
 ```
-classifier.add_data_to_class("cat", "meow") # optional
+classifier.add_data_to_class("cat", "meow")
 classifier.prompt_train(classes)
 ```
 
