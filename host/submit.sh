@@ -21,3 +21,7 @@ curl -X POST -H "Content-Type: multipart/form-data" \
     -F "model=@models/model.lamini" \
     -F "data={\"data\": [\"woof\", \"meow\"]}" \
     "$url"
+
+# curl http://127.0.0.1:5000/upload -F "model=@models/model.lamini" 
+# curl http://127.0.0.1:5000/check -F "model=@models/model.lamini"
+# curl http://127.0.0.1:5000/classify/1 -H "Content-Type: application/json" -d '{"data": "meow"}' 

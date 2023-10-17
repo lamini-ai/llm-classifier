@@ -11,12 +11,13 @@ from lamini import LaminiClassifier
 app = Flask(__name__)
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'data.sqlite3')
 db = SQLAlchemy(app)
 
 class Model(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    filename = db.Column(db.String(80), unique=True, nullable=False)
+    filename = db.Column(db.String(80), nullable=False)
     model = db.Column(db.LargeBinary, nullable=False)
     model_hash = db.Column(db.String(64))
 
@@ -90,21 +91,25 @@ def classify(model_id):
     model = LaminiClassifier.loads(model_record.model)
 
     print('Loading data...')
-    data = request.form.get('data')
-    try:
-        json_data = json.loads(data)
-    except TypeError:
-        return jsonify({"status": "error", "message": "Invalid JSON data."}), 400
-    print('input data', json_data)
+    json_data = request.get_json()
+    print('JSON data:', json_data)
+    if not json_data:
+        try:
+            data = request.form.get('data')
+            json_data = json.loads(data)
+        except TypeError:
+            return jsonify({"status": "error", "message": "Invalid JSON data."}), 400
 
     if 'data' not in json_data:
         return jsonify({"status": "error", "message": "Data must be in a json format, with key `data`."}), 400
     input_data = json_data['data'] 
     if isinstance(input_data, str):
         input_data = [input_data]
+    print('Data:', input_data)
 
     try:
-        classification = model.classify(input_data)
+        classification = model.predict(input_data)
+        # classification = model.classify(input_data)
         return jsonify({"status": "success", "classification": classification})
     except Exception as e:
         return jsonify({"status": "error", "message": f"An error occurred: {str(e)}"}), 500
@@ -147,10 +152,12 @@ def predict():
 
 if __name__ == '__main__':
     # local
-    # app.run(debug=True)
-    
-    # hosted
-    context = ('/etc/letsencrypt/live/classify.lamini.ai/fullchain.pem', '/etc/letsencrypt/live/classify.lamini.ai/privkey.pem')
     with app.app_context():
         db.create_all()
-    app.run(debug=True, ssl_context=context, host='0.0.0.0')
+    app.run(debug=True)
+    
+    # hosted
+    # context = ('/etc/letsencrypt/live/classify.lamini.ai/fullchain.pem', '/etc/letsencrypt/live/classify.lamini.ai/privkey.pem')
+    # with app.app_context():
+    #     db.create_all()
+    # app.run(debug=True, ssl_context=context, host='0.0.0.0')
