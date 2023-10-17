@@ -1,6 +1,7 @@
 lamini
 
 flask
+flask_sqlalchemy
 watchdog
 
 
