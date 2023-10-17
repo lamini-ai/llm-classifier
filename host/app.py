@@ -7,7 +7,7 @@ from lamini import LaminiClassifier
 app = Flask(__name__)
 
 
-@app.route('/predict/', methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
     if 'model' not in request.files:
         return jsonify({"error": "No file part in the request"}), 400
@@ -17,6 +17,7 @@ def predict():
         return jsonify({"error": "No file selected"}), 400
     
     if file:
+        print("Loading file...")
         model = file.read()
         data = request.form.get('data')
         try:
@@ -31,6 +32,7 @@ def predict():
         if isinstance(input_data, str):
             input_data = [input_data]
 
+        print("Running classifier")
         classifier = LaminiClassifier.loads(model)
         try:
             prediction = classifier.predict(input_data)
@@ -41,4 +43,9 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # local
+    # app.run(debug=True)
+    
+    # hosted
+    context = ('/etc/letsencrypt/live/classify.lamini.ai/fullchain.pem', '/etc/letsencrypt/live/classify.lamini.ai/privkey.pem')
+    app.run(debug=True, ssl_context=context, host='0.0.0.0')
