@@ -17,7 +17,7 @@ llm.prompt_train(prompts)
 
 Then, classify!
 ```
-probabilities = llm.predict_proba("woof")
+probabilities = llm.predict_proba(["woof"])
 >> {
  'data': 'woof',
  'prediction': 'dog',
@@ -218,11 +218,11 @@ classifier.prompt_train()
 Classify your data
 
 ```python
-# Classify the data
-prediction = classifier.predict(data)
+# Classify the data - in a list of string(s)
+prediction = classifier.predict(list_of_strings)
 
 # Get the probabilities for each class
-probabilities = classifier.predict_proba(data)
+probabilities = classifier.predict_proba(list_of_strings)
 ```
 
 Save your model
