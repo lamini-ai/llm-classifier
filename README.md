@@ -15,35 +15,37 @@ prompts={
 llm.prompt_train(prompts)
 ```
 
-Then, classify!
+Then, predict!
 ```
-probabilities = llm.predict_proba(["woof"])
->> {
- 'data': 'woof',
- 'prediction': 'dog',
- 'probabilities': array([0.37996491, 0.62003509])
-}
+llm.predict(["meow"])
+>> ["cat"]
+
+llm.predict(["meow", "woof"])
+>> ["cat", "dog"]
 ```
 
-Optionally, add data before you train:
+Optionally, add any data. This can help with improving your classifier. For example, if the LLM is ever wrong:
 ```
-from lamini import LaminiClassifier
+llm.predict(["i like milk", "i like bones"])
+>> ["dog", "cat"] # wrong!
+```
 
+You can correct the LLM by adding those examples as data. And your LLM classifier will learn it:
+```
 llm = LaminiClassifier()
 
-llm.add_data_to_class("cat", "Whiskers is a cat. He likes to eat fish.")
-llm.add_data_to_class("dog", ["Fido is a dog. He likes to eat bones.", "bark bark"])
-
-prompts={
-  "cat": "Cats are generally more independent and aloof than dogs, who are often more social and affectionate. Cats are also more territorial and may be more aggressive when defending their territory.  Cats are self-grooming animals, using their tongues to keep their coats clean and healthy. Cats use body language and vocalizations, such as meowing and purring, to communicate.",
-  "dog": "Dogs are more pack-oriented and tend to be more loyal to their human family.  Dogs, on the other hand, often require regular grooming from their owners, including brushing and bathing. Dogs use body language and barking to convey their messages. Dogs are also more responsive to human commands and can be trained to perform a wide range of tasks.",
-}
+llm.add_data_to_class("cat", "i like milk.")
+llm.add_data_to_class("dog", ["i like bones"]) # list of examples is valid too
 
 llm.prompt_train(prompts)
+
+llm.predict(["i like milk", "i like bones"])
+>> ["cat", "dog"] # correct!
 ```
 
-If you include data on classes that aren't in your `classes`, then the classifier will still learn to predict them, but it won't have a description to leverage to further boost them. As a general suggestion, if you don't have any or little paired data to include on a class, then making sure there's a good description of it in the `classes` is the way to get the LLM to understand what it does.
+If you include data on classes that aren't in your `classes`, then the classifier will include them as new classes, and learn to predict them. However, without a prompt, it won't have a description to use to further boost them. 
 
+General guideline: if you don't have any or little data on a class, then make sure to include a good prompt for it. Like prompt-engineering any LLM, creating good descriptions---e.g. with details and examples---helps the LLM get the right thing.
 
 # Run now
 
