@@ -47,6 +47,14 @@ def main():
         default="models/model.lamini",
     )
 
+    # Parse the path to save the model to
+    parser.add_argument(
+        "--checkpoint",
+        type=str,
+        help="The path to save data checkpoints.",
+        default="models/checkpoint.jsonl",
+    )
+
     # Parse verbose mode
     parser.add_argument(
         "-v",
@@ -60,7 +68,7 @@ def main():
     args = vars(parser.parse_args())
 
     # Create a new classifier
-    classifier = LaminiClassifier()
+    classifier = LaminiClassifier(saved_examples_path=args["checkpoint"])
 
     # Train the classifier on the training data
     for class_data in args["train"]:
@@ -99,7 +107,9 @@ def get_default_classes():
         - "dog"
     """
 
-    print("WARNING ------ No classes or data were specified, using default cat vs dog classes.")
+    print(
+        "WARNING ------ No classes or data were specified, using default cat vs dog classes."
+    )
 
     return {
         "cat": "Cats are generally more independent and aloof. Cats are also more territorial and may be more aggressive when defending their territory.  Cats are self-grooming animals, using their tongues to keep their coats clean and healthy. Cats use body language and vocalizations, such as meowing and purring, to communicate.  An example cat is whiskers, who is a cat who lives in a house with a human.  Another example cat is furball, who likes to eat food and sleep.  A famous cat is garfield, who is a cat who likes to eat lasagna",
