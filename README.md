@@ -25,6 +25,7 @@ llm.predict(["meow"])
 llm.predict(["meow", "woof"])
 >> ["cat", "dog"]
 ```
+Note: each prompt class makes 10 LLM inference calls.
 
 Optionally, add any data. This can help with improving your classifier. For example, if the LLM is ever wrong:
 ```
