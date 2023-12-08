@@ -27,13 +27,17 @@ llm.predict(["meow", "woof"])
 ```
 Note: each prompt class makes 10 LLM inference calls.
 
-Optionally, add any data. This can help with improving your classifier. For example, if the LLM is ever wrong:
+### Optionally, add any data.
+
+This can help with improving your classifier. For example, if the LLM is ever wrong:
 ```
 llm.predict(["i like milk", "i like bones"])
 >> ["dog", "cat"] # wrong!
 ```
 
-You can correct the LLM by adding those examples as data. And your LLM classifier will learn it:
+#### You can correct the LLM by adding those examples as data.
+
+And your LLM classifier will learn it:
 ```
 llm = LaminiClassifier()
 
@@ -50,7 +54,7 @@ If you include data on classes that aren't in your `classes`, then the classifie
 
 General guideline: if you don't have any or little data on a class, then make sure to include a good prompt for it. Like prompt-engineering any LLM, creating good descriptions---e.g. with details and examples---helps the LLM get the right thing.
 
-You can also work with this data more easily through files:
+#### You can also work with this data more easily through files.
 ```
 # Load data
 llm.load_examples(saved_examples_path="path/to/examples.jsonl")
@@ -272,13 +276,13 @@ in the `lamini` python package if you want to look at it.
 No, this is a week night hackathon project, give us feedback and we will improve it.  Some known issues:
 
 1. It doesn't use batching aggressively over classes, so training on many classes could be sped up by more than 100x.
-2. We are refining the LLM example generators. Send us any issues you find with your prompts adn we can improve these models.
+2. We are refining the LLM example generators. Send us any issues you find with your prompts and we can improve these models.
 
 ## Why wouldn't I just use a normal classifier like BART, XGBoost, BERT, etc?
 
 You don't need to label any data using `LaminiClassifier`.  Labeling data sucks.
 
-No fiddling with hyperparameters. Fiddle with prompts instead.  Hopefully english is easier than attention_dropout_pcts.
+No fiddling with hyperparameters. Fiddle with prompts instead.  Hopefully English is easier than attention_dropout_pcts.
 
 ## Why wouldn't I just use a LLM directly?
 
