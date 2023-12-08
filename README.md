@@ -25,7 +25,7 @@ llm.predict(["meow"])
 llm.predict(["meow", "woof"])
 >> ["cat", "dog"]
 ```
-Note: each prompt class makes 10 LLM inference calls.
+Note: each prompt class makes 10 LLM inference calls. See advanced section below to change this.
 
 ### Optionally, add any data.
 
@@ -59,6 +59,9 @@ General guideline: if you don't have any or little data on a class, then make su
 # Load data
 llm.load_examples(saved_examples_path="path/to/examples.jsonl")
 
+# Print data
+print(llm.get_data())
+
 # Save data
 llm.saved_examples_path = "path/to/examples.jsonl" # overrides default at /tmp/saved_examples.jsonl
 llm.save_examples()
@@ -69,6 +72,15 @@ Format of what `examples.jsonl` looks like:
 {"class_name": "cat", "examples": ["i like milk", "meow"]}
 {"class_name": "dog", "examples": ["woof", "i like bones"]}
 ```
+
+### Advanced
+Change the number of LLM examples (and thus inference calls up to this number) per prompt:
+```
+llm = LaminiClassifier(augmented_example_count=5) # 10 is default
+```
+Note that we found 10 to be a good proxy for training an effective classifier. 
+
+If you're working with more classes and want to lift performance, a higher `augmented_example_count` can help.
 
 
 # Run now
