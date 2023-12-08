@@ -50,6 +50,23 @@ If you include data on classes that aren't in your `classes`, then the classifie
 
 General guideline: if you don't have any or little data on a class, then make sure to include a good prompt for it. Like prompt-engineering any LLM, creating good descriptions---e.g. with details and examples---helps the LLM get the right thing.
 
+You can also work with this data more easily through files:
+```
+# Load data
+llm.load_examples(saved_examples_path="path/to/examples.jsonl")
+
+# Save data
+llm.saved_examples_path = "path/to/examples.jsonl" # overrides default at /tmp/saved_examples.jsonl
+llm.save_examples()
+```
+
+Format of what `examples.jsonl` looks like:
+```
+{"class_name": "cat", "examples": ["i like milk", "meow"]}
+{"class_name": "dog", "examples": ["woof", "i like bones"]}
+```
+
+
 # Run now
 
 ```bash
