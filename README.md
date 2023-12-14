@@ -57,13 +57,14 @@ General guideline: if you don't have any or little data on a class, then make su
 #### You can also work with this data more easily through files.
 ```
 # Load data
-llm.load_examples(saved_examples_path="path/to/examples.jsonl")
+llm.saved_examples_path = "path/to/examples.jsonl" # overrides default at /tmp/saved_examples.jsonl
+llm.load_examples()
 
 # Print data
 print(llm.get_data())
 
 # Save data
-llm.saved_examples_path = "path/to/examples.jsonl" # overrides default at /tmp/saved_examples.jsonl
+llm.saved_examples_path = "path/to/examples.jsonl"
 llm.save_examples()
 ```
 
