@@ -63,6 +63,15 @@ llm.load_examples()
 # Print data
 print(llm.get_data())
 
+# Train on that data (with prompts)
+llm.prompt_train(prompts)
+
+# Just train on that data (without any prompts)
+llm.train()
+```
+
+Finally, you can save the data.
+```
 # Save data
 llm.saved_examples_path = "path/to/examples.jsonl"
 llm.save_examples()
