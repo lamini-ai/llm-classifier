@@ -1,6 +1,16 @@
-# LLM Classifier - Instantly classify data with [Lamini](https://lamini.ai) & Llama 2
+<div align="center">
+<img src="https://avatars.githubusercontent.com/u/130713213?s=200&v=4" width="110"><img src="https://huggingface.co/lamini/instruct-peft-tuned-12b/resolve/main/Lamini_logo.png?max-height=110" height="110">
+</div>
+<div align="center">
 
-Train a new classifier with just a prompt. No data needed -- but add data to boost, if you have it.
+[![Latest Release](https://img.shields.io/badge/Latest%20Version-1.3.6-blue?logo=github)](https://github.com/lamini-ai/llm-classifier/commits/main)
+[![GitHub License](https://img.shields.io/github/license/lamini-ai/llm-classifier)](https://github.com/lamini-ai/llm-classifier/blob/main/LICENSE)</div>
+
+## LLM Classifier 
+### Instantly classify data with [Lamini](https://lamini.ai) & Llama 2
+
+Train a new classifier with just a prompt.</br>
+No data needed -- but add data to boost, if you have it.
 
 ```
 from lamini import LaminiClassifier
@@ -25,11 +35,11 @@ llm.predict(["meow"])
 llm.predict(["meow", "woof"])
 >> ["cat", "dog"]
 ```
-Note: each prompt class makes 10 LLM inference calls. See advanced section below to change this.
+Note: each prompt class makes 10 LLM inference calls.</br> See advanced section below to change this.
 
 ### Optionally, add any data.
 
-This can help with improving your classifier. For example, if the LLM is ever wrong:
+This can help with improving your classifier.</br> For example, if the LLM is ever wrong:
 ```
 llm.predict(["i like milk", "i like bones"])
 >> ["dog", "cat"] # wrong!
@@ -50,9 +60,9 @@ llm.predict(["i like milk", "i like bones"])
 >> ["cat", "dog"] # correct!
 ```
 
-If you include data on classes that aren't in your `classes`, then the classifier will include them as new classes, and learn to predict them. However, without a prompt, it won't have a description to use to further boost them. 
+If you include data on classes that aren't in your `classes`, then the classifier will include them as new classes, and learn to predict them.</br> However, without a prompt, it won't have a description to use to further boost them. 
 
-General guideline: if you don't have any or little data on a class, then make sure to include a good prompt for it. Like prompt-engineering any LLM, creating good descriptions---e.g. with details and examples---helps the LLM get the right thing.
+General guideline: if you don't have any or little data on a class, then make sure to include a good prompt for it.</br> Like prompt-engineering any LLM, creating good descriptions---e.g. with details and examples---helps the LLM get the right thing.
 
 #### You can also work with this data more easily through files.
 ```
@@ -93,13 +103,13 @@ Note that we found 10 to be a good proxy for training an effective classifier.
 If you're working with more classes and want to lift performance, a higher `augmented_example_count` can help.
 
 
-# Run now
+## Run now
 
 ```bash
 ./train.sh
 ```
 
-We have some default classes. You can specify your own super easily like this:
+We have some default classes.</br> You can specify your own super easily like this:
 ```bash
 ./train.sh --class "cat: CAT_PROMPT" --class "dog: DOG_PROMPT"
 ```
@@ -109,7 +119,7 @@ The prompts are descriptions of your classes.
 ./classify.sh 'woof'
 ```
 
-You can get the probabilities for all the classes, in this case `dog` (62%) and `cat` (38%). These can help with gauging uncertainty.
+You can get the probabilities for all the classes, in this case `dog` (62%) and `cat` (38%).</br> These can help with gauging uncertainty.
 ```python
 {
  'data': 'woof',
@@ -178,7 +188,7 @@ charlie brown.  Another example dog is clifford, who is a big red dog.
  'probabilities': array([0.46141002, 0.53858998])}
 ```
 
-# Installation
+## Installation
 
 Clone this repo, and run the `train.sh` or `classify.sh` command line tools.  
 
@@ -231,7 +241,7 @@ These command line scripts just call python inside of docker so you don't have t
 
 If you hate docker, you can also run this from python easily...
 
-# Python Library
+## Python Library
 
 Install it
 `pip install lamini`
@@ -284,32 +294,41 @@ Load your model
 classifier = LaminiClassifier.load("SOME_PATH")
 ```
 
-# FAQ
+## FAQ
 
-## How does it work?
+### How does it work?
 
-The LLM classifier converts your prompts into a pile of data, using the Llama 2 LLM. It then finetunes another LLM to distinguish between each pile of data.  
+The LLM classifier converts your prompts into a pile of data, using the Llama 2 LLM.</br> It then finetunes another LLM to distinguish between each pile of data.  
 
-We use several specialized LLMs derived from Llama 2 to convert prompts into piles of training examples for each class.  The code for this is available
+We use several specialized LLMs derived from Llama 2 to convert prompts into piles of training examples for each class.</br>  The code for this is available
 in the `lamini` python package if you want to look at it. 
 
-## Is this perfect?
+### Is this perfect?
 
-No, this is a week night hackathon project, give us feedback and we will improve it.  Some known issues:
+No, this is a week night hackathon project, give us feedback and we will improve it.</br>  Some known issues:
 
 1. It doesn't use batching aggressively over classes, so training on many classes could be sped up by more than 100x.
 2. We are refining the LLM example generators. Send us any issues you find with your prompts and we can improve these models.
 
-## Why wouldn't I just use a normal classifier like BART, XGBoost, BERT, etc?
+### Why wouldn't I just use a normal classifier like BART, XGBoost, BERT, etc?
 
 You don't need to label any data using `LaminiClassifier`.  Labeling data sucks.
 
-No fiddling with hyperparameters. Fiddle with prompts instead.  Hopefully English is easier than attention_dropout_pcts.
+No fiddling with hyperparameters.</br> Fiddle with prompts instead.</br>  Hopefully English is easier than attention_dropout_pcts.
 
-## Why wouldn't I just use a LLM directly?
+### Why wouldn't I just use a LLM directly?
 
-A classifier always outputs a valid class.  An LLM might answer the question "Is this talking about a cat" with "Well... that depends on ....".  Writing a parser sucks.
+A classifier always outputs a valid class.</br>  An LLM might answer the question "Is this talking about a cat" with "Well... that depends on ....".</br>  Writing a parser sucks.
 
 Added benefit: classifiers give you probabilities and can be calibrated: https://machinelearningmastery.com/threshold-moving-for-imbalanced-classification/
 
+---
 
+</div>
+<div align="center">
+
+![GitHub forks](https://img.shields.io/github/forks/lamini-ai/llm-classifier) &ensp; © Lamini &ensp; ![GitHub stars](https://img.shields.io/github/stars/lamini-ai/llm-classifier) 
+
+</div>
+
+--------
