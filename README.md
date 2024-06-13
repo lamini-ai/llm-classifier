@@ -1,5 +1,3 @@
-# This repo has been deprecated, please refer to https://github.com/lamini-ai/lamini-sdk
-
 # LLM Classifier - Instantly classify data with [Lamini](https://lamini.ai) & Llama 2
 
 Train a new classifier with just a prompt. No data needed -- but add data to boost, if you have it.
